@@ -1,0 +1,194 @@
+<!-- 🔒 MODAL DE ACCESO -->
+<div *ngIf="!autenticado" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-icon">🔒</div>
+    <h2>Acceso Restringido</h2>
+    <p>Introduce la clave de administración para acceder al panel de envíos.</p>
+
+    <form (ngSubmit)="validarAcceso()">
+      <input 
+        type="password" 
+        [(ngModel)]="passwordInput" 
+        name="password" 
+        placeholder="Contraseña"
+        autofocus
+      />
+
+      <p *ngIf="errorPassword" class="error-msg">⚠️ Contraseña incorrecta. Inténtalo de nuevo.</p>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" (click)="cancelarAcceso()">Cancelar</button>
+        <button type="submit" class="btn-submit">Entrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 📦 PANEL ADMIN (Solo visible tras validar) -->
+<div *ngIf="autenticado" class="admin-container">
+  
+  <div class="header-admin">
+    <div>
+      <h1>🌱 Panel de Gestión General</h1>
+      <p>Gestión interna de envíos y donaciones - Tienda ANEA</p>
+    </div>
+  </div>
+
+  <!-- 📦 PANEL ADMIN DE PEDIDOS -->
+  <div class="tabla-card">
+    <div style="padding: 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      <h2 style="margin: 0; color: #1D3B2B; font-size: 1.2rem;">Pedidos de la Tienda</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>REF. PEDIDO</th>
+          <th>CLIENTE</th>
+          <th>TELÉFONO</th>
+          <th>DIRECCIÓN DE ENTREGA</th>
+          <th>DETALLE PRODUCTOS</th>
+          <th>TOTAL</th>
+          <th>ESTADO</th>
+          <th>ACCIÓN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pedido of pedidos">
+          <td>
+            <strong>#ANEA-{{ pedido.id_pedido }}</strong><br>
+            <small style="color: #888;">{{ pedido.id_paypal }}</small>
+          </td>
+          <td>
+            <strong>{{ pedido.nombre_cliente }}</strong><br>
+            <small>{{ pedido.email_cliente }}</small>
+          </td>
+          <td>{{ pedido.telefono_cliente }}</td>
+          <td>{{ pedido.direccion_envio }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let prod of parseProductos(pedido.productos)" style="margin-bottom: 4px; font-size: 0.9rem;">
+                <strong>{{ prod.title }}</strong>
+                <span *ngIf="prod.variant" style="color: #64748b;"> ({{ prod.variant }})</span>
+                <br>
+                <small style="color: #475569;">Cant: {{ prod.quantity || 1 }} | {{ (prod.price || pedido.total) | currency:'EUR':'symbol':'1.2-2' }}</small>
+              </li>
+            </ul>
+          </td>
+          <td><strong>{{ pedido.total | currency:'EUR':'symbol':'1.2-2' }}</strong></td>
+          <td>
+            <span [class]="pedido.estado === 'Enviado' ? 'badge enviado' : 'badge pendiente'">
+              {{ pedido.estado }}
+            </span>
+          </td>
+          <td>
+            <button 
+              [class]="pedido.estado === 'Enviado' ? 'btn-estado pendiente' : 'btn-estado enviado'"
+              (click)="cambiarEstado(pedido)">
+              {{ pedido.estado === 'Enviado' ? 'Marcar Pendiente' : 'Marcar Enviado ✓' }}
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="pedidos.length === 0">
+          <td colspan="8" style="text-align: center; color: #64748b; padding: 20px;">No hay pedidos de tienda registrados todavía.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 💚 SECCIÓN 2: DONACIONES RECIBIDAS -->
+  <div class="tabla-card" style="margin-top: 40px;">
+    <div style="padding: 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      <h2 style="margin: 0; color: #1D3B2B; font-size: 1.2rem;">Donaciones y Colaboraciones Económicas</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>REF. DONACIÓN</th>
+          <th>DONANTE</th>
+          <th>TELÉFONO</th>
+          <th>IMPORTE</th>
+          <th>ESTADO</th>
+          <th>ID PAYPAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let donacion of donaciones">
+          <td><strong>#DONACION-{{ donacion.id }}</strong></td>
+          <td>
+            <strong>{{ donacion.nombre_cliente }}</strong><br>
+            <small>{{ donacion.email_cliente }}</small>
+          </td>
+          <td>{{ donacion.telefono || 'No facilitado' }}</td>
+          <td><strong>{{ donacion.importe | currency:'EUR':'symbol':'1.2-2' }}</strong></td>
+          <td>
+            <span class="badge enviado">{{ donacion.estado }}</span>
+          </td>
+          <td><small style="color: #64748b;">{{ donacion.id_paypal }}</small></td>
+        </tr>
+        <tr *ngIf="donaciones.length === 0">
+          <td colspan="6" style="text-align: center; color: #64748b; padding: 20px;">No hay donaciones registradas todavía.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- 🔄 SECCIÓN 3: SUSCRIPCIONES ACTIVAS (Sin botón de actualizar) -->
+  <div class="tabla-card" style="margin-top: 40px;">
+    <div style="padding: 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      <h2 style="margin: 0; color: #1D3B2B; font-size: 1.2rem;">Suscripciones Activas / Recurrentes</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID SUSCRIPCIÓN (PAYPAL)</th>
+          <th>SOCIO / CLIENTE</th>
+          <th>EMAIL / TELÉFONO</th>
+          <th>PLAN / CUOTA</th>
+          <th>ESTADO</th>
+          <th>FECHA INICIO</th>
+          <th>ACCIÓN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sub of suscripciones">
+          <td>
+            <strong style="color: #059669;">{{ sub.subscription_id_paypal }}</strong><br>
+            <small style="color: #888;">ID interno: #{{ sub.id_suscripcion }}</small>
+          </td>
+          <td>
+            <strong>{{ sub.nombre }}</strong><br>
+            <small style="color: #64748b;">DNI: {{ sub.dni }}</small>
+          </td>
+          <td>
+            {{ sub.email }}<br>
+            <small style="color: #64748b;">{{ sub.telefono }}</small>
+          </td>
+          <td>
+            <span [style.color]="sub.importe == 25 ? '#1D3B2B' : '#0284c7'" style="font-weight: 700;">
+              {{ sub.importe == 25 ? 'Cuota Estándar' : 'Cuota Joven' }}
+            </span><br>
+            <small style="color: #64748b;">{{ sub.importe | currency:'EUR':'symbol':'1.2-2' }} / año</small>
+          </td>
+          <td>
+            <span [class]="sub.estado === 'ACTIVE' ? 'badge enviado' : 'badge pendiente'">
+              {{ sub.estado }}
+            </span>
+          </td>
+          <td><small style="color: #64748b;">{{ sub.fecha_creacion | date:'medium' }}</small></td>
+          <td>
+            <button 
+              *ngIf="sub.estado === 'ACTIVE'"
+              class="btn-baja" 
+              (click)="darDeBajaSuscripcion(sub.id_suscripcion)">
+              Dar de baja ❌
+            </button>
+            <span *ngIf="sub.estado !== 'ACTIVE'" style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Cancelada</span>
+          </td>
+        </tr>
+        <tr *ngIf="suscripciones.length === 0">
+          <td colspan="7" style="text-align: center; color: #64748b; padding: 20px;">No hay suscripciones registradas todavía.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

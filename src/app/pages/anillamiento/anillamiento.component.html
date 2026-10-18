@@ -1,0 +1,101 @@
+<main class="birding-page">
+	<section class="birding-hero">
+		<div class="birding-copy">
+			<span class="page-kicker">OBSERVAR · APRENDER · CONSERVAR</span>
+			<h1>Grupo<br><em>ornitológico</em></h1>
+			<p>Las aves nos cuentan cómo está el territorio. En ANEA las observamos, aprendemos de ellas y compartimos ese conocimiento para defender los espacios que necesitan.</p>
+			<a class="birding-cta" routerLink="/contacto">Contacta con ANEA <span aria-hidden="true">↗</span></a>
+		</div>
+		<figure class="birding-photo">
+			<img src="abejaruco.png" alt="Abejaruco europeo posado en una rama">
+			<figcaption>Abejaruco europeo · biodiversidad de nuestro entorno</figcaption>
+		</figure>
+	</section>
+
+	<section class="birding-details">
+		<div class="birding-intro">
+			<span class="page-kicker">CIENCIA CIUDADANA</span>
+			<h2>Un paisaje se entiende mejor cuando sabemos quién lo habita.</h2>
+		</div>
+		<div class="birding-text">
+			<p>El grupo ornitológico de ANEA promueve la observación y divulgación de las aves de la comarca. Las salidas al campo acercan a personas de todas las edades a la diversidad de marismas, zonas agrícolas y espacios naturales cercanos.</p>
+			<p>El anillamiento científico, realizado por personal autorizado y siguiendo los protocolos de bienestar animal, permite obtener información sobre movimientos y supervivencia de las aves. La actividad divulgativa ayuda a que esos datos se conviertan también en conciencia y compromiso con la conservación.</p>
+		</div>
+	</section>
+
+	<section class="environmental-program" aria-labelledby="environmental-program-title">
+		<div class="program-intro">
+			<div>
+				<span class="page-kicker">EDUCACIÓN Y PARTICIPACIÓN</span>
+				<h2 id="environmental-program-title">{{ environmentalProgram.title }}</h2>
+			</div>
+			<div class="program-intro-text">
+				@for (paragraph of environmentalProgram.paragraphs; track paragraph) {
+					<p>{{ paragraph }}</p>
+				}
+			</div>
+		</div>
+		<div class="program-brazo">
+			<div class="program-brazo-heading">
+				<span class="page-kicker">ACTIVIDADES EN EL TERRITORIO</span>
+				<h3>Brazo del Este</h3>
+				<p>{{ environmentalProgram.brazoDelEsteIntro }}</p>
+			</div>
+			<div class="program-brazo-content">
+				<p>{{ environmentalProgram.schools }}</p>
+				<h4>{{ environmentalProgram.publicIntro }}</h4>
+				<ul>
+					@for (activity of environmentalProgram.publicActivities; track activity) {
+						<li>{{ activity }}</li>
+					}
+				</ul>
+				<p>{{ environmentalProgram.closing }}</p>
+			</div>
+		</div>
+		<div class="wetland-video-links" aria-label="Vídeos sobre el Día Mundial de los Humedales">
+			@for (video of wetlandVideos; track video.url) {
+				<a [href]="video.url" target="_blank" rel="noopener noreferrer">{{ video.title }} <span aria-hidden="true">↗</span></a>
+			}
+		</div>
+	</section>
+
+	<section class="field-activities" aria-labelledby="field-activities-title">
+		<header class="field-activities-heading">
+			<span class="page-kicker">SALIDAS, TALLERES Y CONSERVACIÓN</span>
+			<h2 id="field-activities-title">Aprender haciendo, en contacto con la naturaleza.</h2>
+		</header>
+		<div class="field-activity-list">
+			@for (activity of activities; track activity.title) {
+				<article class="field-activity">
+					<h3>{{ activity.title }}</h3>
+					<div>
+						@for (paragraph of activity.paragraphs; track paragraph) {
+							<p>{{ paragraph }}</p>
+						}
+					</div>
+				</article>
+			}
+		</div>
+	</section>
+
+	<section class="species-gallery">
+		<div class="species-heading">
+			<span class="page-kicker">AVIFAUNA DE LA COMARCA</span>
+			<h2>Conocer cada especie es el primer paso para protegerla.</h2>
+		</div>
+		<div class="species-grid">
+			@for (bird of birds; track bird.title) {
+				<article class="species-card">
+					<img [src]="bird.image" [alt]="bird.title">
+					<div><h3>{{ bird.title }}</h3><p>{{ bird.text }}</p></div>
+				</article>
+			}
+		</div>
+	</section>
+
+	<section class="birding-strip">
+		<img src="cerceta.webp" alt="Cerceta pardilla, especie amenazada de los humedales">
+		<div><span class="page-kicker">UN HOGAR QUE PROTEGER</span><h2>La vida de las aves depende de humedales vivos.</h2></div>
+		<a routerLink="/proyectos">Explora los proyectos <span aria-hidden="true">→</span></a>
+	</section>
+</main>

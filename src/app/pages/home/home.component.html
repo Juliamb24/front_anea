@@ -1,0 +1,122 @@
+<section class="hero home-video-hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="cerceta.webp" aria-hidden="true">
+    <source src="nav.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <span class="hero-kicker">GRUPO ECOLOGISTA · DESDE 1987</span>
+    <h1>Defensa de la naturaleza.<br><em>Compromiso con nuestro entorno.</em></h1>
+    <p>Trabajamos por la conservación de la biodiversidad y los humedales de Los Palacios y Villafranca.</p>
+    <a routerLink="/proyectos" class="hero-link">Conoce nuestro trabajo <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container-narrow">
+    <h2>¡Únete a  ANEA!</h2>
+    <p>
+      ANEA (Defensa de la Naturaleza) es una asociación ecologista fundada en 1987 con raíces profundas en el entorno de Los Palacios y Villafranca, que centra su labor en la protección y conservación del valioso patrimonio natural de la zona. Nuestra actividad se desarrolla principalmente en las inmediaciones de las Marismas del Guadalquivir, un espacio de extraordinaria riqueza ecológica.
+    </p>
+    <p>
+      Nuestra asociación desarrolla acciones orientadas a la defensa de la naturaleza, la sensibilización ambiental y la educación ecológica de la ciudadanía. Creemos firmemente que la participación ciudadana es clave para garantizar la sostenibilidad y la conservación a largo plazo de estos espacios naturales.
+    </p>
+    <button routerLink="/socios" class="btn-primary">HAZTE SOCIO</button>
+  </div>
+</section>
+
+<section class="news">
+  <div class="container">
+    <h2 class="section-title">SEMBRANDO FUTURO</h2>
+    <div class="grid">
+      <div class="card" *ngFor="let n of news">
+        <div class="card-img">
+          <img [src]="n.image" [alt]="n.title">
+        </div>
+        <div class="card-body">
+          <h3>{{ n.title }}</h3>
+          <p>{{ n.text }}</p>
+          <!-- Fuente y enlace dinámico -->
+          <a [href]="n.url" target="_blank" rel="noopener noreferrer" class="card-link">
+            Fuente: {{ n.source }} <span class="arrow-link">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="collab">
+  <div class="collab-container container">
+    <div class="collab-left">
+      <h2>TU HUELLA EN LA NATURALEZA</h2>
+      <p>El futuro de nuestro entorno natural se construye con cada pequeña acción. Descubre cómo puedes sumarte hoy y convertir tu compromiso en un impacto real y duradero para las generaciones venideras.</p>
+    </div>
+
+    <div class="collab-right">
+      <a routerLink="/socios" class="item">
+        <div class="icon">
+          <!-- Icono de Comunidad / Socio -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+        <div class="item-text">
+          <h4>SER SOCIO</h4>
+          <p>Participa activamente en el proyecto.</p>
+        </div>
+      </a>
+
+      <a routerLink="/tienda" class="item">
+        <div class="icon">
+          <!-- Icono de Planta / Sostenibilidad / Tienda -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+        </div>
+        <div class="item-text">
+          <h4>TIENDA EN CONSTRUCCIÓN</h4>
+          <p>Pronto volveremos con nuevas formas de apoyar a ANEA.</p>
+        </div>
+      </a>
+
+      <a routerLink="/donacion" class="item">
+        <div class="icon">
+          <!-- Icono de Corazón / Donativo -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        </div>
+        <div class="item-text">
+          <h4>DONATIVO</h4>
+          <p>Ayuda con una aportación puntual.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  
+</section>
+
+<section class="instagram-section">
+  <div class="instagram-heading">
+    <div>
+      <span class="section-kicker">EN EL TERRENO</span>
+      <h2>ANEA en Instagram</h2>
+      <p>Actividades, encuentros y naturaleza en nuestra comarca.</p>
+    </div>
+    <a href="https://www.instagram.com/anea.ecologista/" target="_blank" rel="noopener noreferrer" class="instagram-profile">&#64;anea.ecologista <span aria-hidden="true">↗</span></a>
+  </div>
+  @if (instagramPosts.length > 0) {
+    <div class="instagram-grid">
+      @for (post of instagramPosts; track post.id) {
+        <a class="instagram-post" [href]="post.permalink" target="_blank" rel="noopener noreferrer" [attr.aria-label]="post.caption || 'Publicación de ANEA en Instagram'">
+          @if (post.media_type === 'VIDEO') {
+            <video [src]="post.media_url" [poster]="post.thumbnail_url" autoplay muted loop playsinline preload="metadata"></video>
+          } @else {
+            <img [src]="post.media_url" [alt]="post.caption || 'Publicación de ANEA en Instagram'">
+          }
+          <span aria-hidden="true">↗</span>
+        </a>
+      }
+    </div>
+  } @else {
+    <a class="instagram-empty" href="https://www.instagram.com/anea.ecologista/" target="_blank" rel="noopener noreferrer">
+      <span>Las últimas actividades de ANEA</span>
+      <strong>Descúbrelas en Instagram <span aria-hidden="true">↗</span></strong>
+    </a>
+  }
+</section>

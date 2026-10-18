@@ -1,0 +1,138 @@
+.collaborate-hero {
+	padding: 82px 10% 70px;
+	background: var(--anea-blue-deep, #17465e);
+}
+
+.collaborate-hero .page-kicker {
+	color: #e9c66d;
+}
+
+.collaborate-hero h1 {
+	color: #fffefa;
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: 4rem;
+	font-weight: 500;
+	line-height: 1.03;
+}
+
+.collaborate-hero h1 em {
+	color: #e9c66d;
+	font-weight: 400;
+}
+
+.collaborate-hero p {
+	max-width: 670px;
+	margin: 22px 0 0;
+	color: rgba(255, 254, 250, 0.8);
+	font-size: 1.05rem;
+	line-height: 1.75;
+}
+
+.collaborate-options {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1px;
+	padding: 0 8% 82px;
+	background: var(--anea-paper, #f8f6ed);
+}
+
+.collaborate-option {
+	min-height: 260px;
+	padding: 36px 30px;
+	border-top: 3px solid var(--anea-ochre, #c7963c);
+	background: #fffefa;
+}
+
+.option-number {
+	display: block;
+	margin-bottom: 24px;
+	color: var(--anea-green, #4d8964);
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: 1.3rem;
+}
+
+.collaborate-option h2 {
+	margin: 0 0 12px;
+	color: var(--anea-blue-deep, #17465e);
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: 1.75rem;
+	font-weight: 500;
+}
+
+.collaborate-option p {
+	min-height: 94px;
+	margin: 0 0 22px;
+	color: var(--anea-muted, #5d7276);
+	font-size: 0.95rem;
+	line-height: 1.65;
+}
+
+.collaborate-option a span {
+	color: var(--anea-ochre, #c7963c);
+}
+
+.collaborate-photo {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	min-height: 360px;
+	background: #e9eee5;
+}
+
+.collaborate-photo img {
+	width: 100%;
+	height: 100%;
+	min-height: 360px;
+	object-fit: cover;
+}
+
+.collaborate-photo > div {
+	align-self: center;
+	padding: 48px 12%;
+}
+
+.collaborate-photo h2 {
+	max-width: 440px;
+	font-size: 2.3rem;
+}
+
+@media (max-width: 760px) {
+	.collaborate-hero {
+		padding: 56px 22px;
+	}
+
+	.collaborate-hero h1 {
+		font-size: 2.8rem;
+	}
+
+	.collaborate-options {
+		grid-template-columns: 1fr;
+		gap: 12px;
+		padding: 0 18px 56px;
+	}
+
+	.collaborate-option {
+		min-height: 0;
+		padding: 28px 22px;
+	}
+
+	.collaborate-option p {
+		min-height: 0;
+	}
+
+	.collaborate-photo {
+		grid-template-columns: 1fr;
+	}
+
+	.collaborate-photo img {
+		min-height: 260px;
+		height: 260px;
+	}
+
+	.collaborate-photo > div {
+		padding: 38px 22px;
+	}
+
+	.collaborate-photo h2 {
+		font-size: 1.8rem;
+	}
+}

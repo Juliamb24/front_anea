@@ -1,0 +1,82 @@
+<div class="proyectos-container">
+
+  <section class="proyectos-header">
+    <div class="proyectos-heading">
+      <span class="section-kicker">ACCIÓN LOCAL · IMPACTO DURADERO</span>
+      <h1>NUESTROS<br><em>PROYECTOS</em></h1>
+      <p>Conservamos la biodiversidad de nuestro entorno con ciencia, educación y trabajo compartido en el territorio.</p>
+    </div>
+    <div class="proyectos-header-note"><span>Los Palacios y Villafranca</span><strong>Marismas del Guadalquivir</strong></div>
+  </section>
+
+  <!-- SECCIÓN 2: REJILLA DE PROYECTOS (GRID) -->
+  <section class="proyectos-grid-section">
+    <div class="proyectos-grid" id="proyectos-grid">
+      @for (proyecto of proyectos; let index = $index; track proyecto.titulo) {
+        <article class="proyecto-card">
+          <div class="proyecto-img-container">
+            <img [src]="proyecto.imagenes[0]" [alt]="proyecto.titulo" loading="lazy">
+          </div>
+          <div class="proyecto-content">
+            <h3>{{ proyecto.titulo }}</h3>
+            <p>{{ proyecto.resumen }}</p>
+            <a class="proyecto-btn" [href]="'/proyectos#detalle-proyecto-' + index">SABER MÁS</a>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  @for (proyecto of proyectos; let projectIndex = $index; track proyecto.titulo) {
+    <div class="modal-proyecto-overlay" [id]="'detalle-proyecto-' + projectIndex">
+      <a class="modal-proyecto-backdrop" href="/proyectos#proyectos-grid" aria-label="Cerrar detalle del proyecto"></a>
+      <section class="modal-proyecto-content" role="dialog" aria-modal="true" [attr.aria-label]="proyecto.titulo" tabindex="-1">
+        <a class="modal-close-btn" href="/proyectos#proyectos-grid" aria-label="Cerrar detalle del proyecto">&times;</a>
+
+        <div class="modal-proyecto-body">
+          <div class="modal-proyecto-gallery">
+            <div class="modal-proyecto-image-controls">
+              @for (imagen of proyecto.imagenes; let imageIndex = $index; track imagen) {
+                <input class="modal-image-toggle" type="radio" [id]="'proyecto-' + projectIndex + '-imagen-' + imageIndex" [name]="'proyecto-' + projectIndex + '-galeria'" [checked]="imageIndex === 0" [attr.aria-label]="'Ver imagen ' + (imageIndex + 1)">
+                <img class="modal-main-image" [src]="imagen" [alt]="proyecto.titulo">
+              }
+            </div>
+            <div class="modal-proyecto-thumbnails" aria-label="Imágenes del proyecto">
+              @for (imagen of proyecto.imagenes; let imageIndex = $index; track imagen) {
+                <label class="modal-thumbnail" [for]="'proyecto-' + projectIndex + '-imagen-' + imageIndex">
+                  <img [src]="imagen" [alt]="proyecto.titulo">
+                </label>
+              }
+            </div>
+          </div>
+
+          <div class="modal-proyecto-info">
+            <h2>{{ proyecto.titulo }}</h2>
+            <div class="linea-decorativa-modal"></div>
+            <div class="modal-noticia-text">
+                @for (parrafo of proyecto.textoCompleto; track parrafo) {
+                  <p>{{ parrafo }}</p>
+                }
+                @if (proyecto.lista; as elementos) {
+                  <ul>
+                    @for (elemento of elementos; track elemento) {
+                      <li>{{ elemento }}</li>
+                    }
+                  </ul>
+                }
+                @if (proyecto.videos; as videos) {
+                  <div class="modal-proyecto-videos">
+                    <h3>Vídeos relacionados</h3>
+                    @for (video of videos; track video.url) {
+                      <a [href]="video.url" target="_blank" rel="noopener noreferrer">{{ video.titulo }} <span aria-hidden="true">↗</span></a>
+                    }
+                  </div>
+                }
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  }
+
+</div>

@@ -1,0 +1,282 @@
+.footer {
+  background: var(--bg-cream-light, #f0ebd9); /* Sintonizado con el fondo de noticias */
+  color: #1E293B;
+  padding: 80px 24px 32px;  /* Más aire arriba para que respire */
+  border-top: 1px solid rgba(30, 41, 59, 0.06);
+}
+
+/* Contenedor elástico idéntico al del resto de la web */
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  transition: max-width 0.3s ease;
+}
+
+/* PARTE SUPERIOR */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+/* COLUMNAS */
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 200px;
+}
+
+/* TITULOS */
+.col h4 {
+  color: var(--primary, #4A845C); /* Usamos tu verde corporativo */
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+/* BRAND (LOGO + TEXTO) */
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alineación a la izquierda más elegante que al centro */
+  text-align: left;
+  max-width: 320px;
+}
+
+.brand img {
+  width: 178px;
+  height: 64px;
+  border-radius: 0;
+  object-fit: cover;
+  object-position: center 50%;
+  border: 0;
+  margin-bottom: 12px;
+}
+
+.brand p {
+  font-size: 0.9rem;
+  color: var(--text-muted, #64748B);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* LINKS */
+.col a {
+  color: #475569;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+  width: fit-content;
+}
+
+.col a:hover {
+  color: var(--primary, #4A845C);
+}
+
+/* SOCIALES PREMIUM */
+.social {
+  display: flex;
+  gap: 12px;
+}
+
+.social a {
+  background: #ffffff;
+  color: #475569;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  border: 1px solid #E2E8F0;
+  transition: all 0.3s ease;
+}
+
+.social a svg {
+  width: 20px;
+  height: 20px;
+}
+
+.social a:hover {
+  background: var(--primary, #4A845C);
+  color: white;
+  border-color: var(--primary, #4A845C);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(74, 132, 92, 0.15);
+}
+
+/* PARTE INFERIOR */
+.footer-bottom {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(30, 41, 59, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted, #64748B);
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* LEGAL */
+.legal {
+  display: flex;
+  gap: 24px;
+}
+
+.legal a {
+  cursor: pointer;
+  color: var(--text-muted, #64748B);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.legal a:hover {
+  color: var(--primary, #4A845C);
+}
+
+/* ================= COMPORTAMIENTO PANTALLAS GRANDES (27"+) ================= */
+@media (min-width: 1500px) {
+  .footer-container {
+    max-width: 1440px; /* Se abre en sincronía con tu monitor de 27" */
+  }
+}
+
+/* ================= RESPONSIVE MÓVIL ================= */
+@media (max-width: 768px) {
+  .footer {
+    padding: 60px 16px 32px;
+  }
+  
+  .footer-top {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .brand {
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .brand img {
+    width: 150px;
+    height: 54px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .legal {
+    justify-content: center;
+    gap: 16px;
+  }
+}
+
+/* Fondo oscuro translúcido que cubre toda la pantalla */
+.modal-legal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.6); /* Azul grisáceo muy oscuro con transparencia */
+  backdrop-filter: blur(4px); /* Difumina ligeramente lo que hay detrás, queda súper moderno */
+  z-index: 9999; /* Asegura que esté por encima de TODO */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* La caja blanca central (la pestañota) */
+.modal-legal-content {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 650px; /* Ancho ideal para leer textos */
+  max-height: 80vh; /* Ocupa como mucho el 80% del alto de la pantalla */
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: aparecerModal 0.3s ease-out; /* Efecto suave de entrada */
+}
+
+/* Título de la modal */
+.modal-legal-content h2 {
+  font-size: 1.75rem;
+  color: #1E293B;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+/* Zona con scroll para leer los textos largos cómodamente */
+.modal-scroll-area {
+  overflow-y: auto;
+  padding-right: 8px;
+  color: #475569;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  text-align: justify;
+}
+
+/* Botón de cerrar (X) arriba a la derecha */
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: #94A3B8;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  color: #4A845C; /* Tu verde de ANEA al pasar el ratón */
+}
+
+/* Para que los enlaces del footer parezcan botones interactivos */
+.link-legal {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.link-legal:hover {
+  color: #FFFBE0; /* El amarillo crema que elegiste iluminará el enlace al pasar el ratón */
+}
+
+/* Animación de entrada */
+@keyframes aparecerModal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

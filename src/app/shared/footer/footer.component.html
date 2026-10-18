@@ -1,0 +1,86 @@
+<footer class="footer">
+  <div class="footer-container">
+    
+    <!-- PARTE PRINCIPAL -->
+    <div class="footer-top">
+
+      <!-- BRAND -->
+      <div class="col brand">
+        <img src="logo.png" alt="ANEA, Grupo por la Defensa de la Naturaleza">
+        <p>
+          Proyecto comprometido con la naturaleza, la acción social y la educación ambiental en Los Palacios y Villafranca.
+        </p>
+      </div>
+
+      <!-- LINKS -->
+      <div class="col">
+        <h4>PROYECTOS</h4>
+        <a routerLink="/proyectos">Nuestros proyectos</a>
+        <a routerLink="/tienda">Tienda</a>
+        <a routerLink="/colaboraciones">Colaboraciones</a>
+      </div>
+
+      <div class="col">
+        <h4>INFORMACIÓN</h4>
+        <a routerLink="/equipo">Equipo</a>
+  
+        <a routerLink="/socios">Hazte socio</a>
+        <a routerLink="/contacto">Contacto</a>
+      </div>
+
+      <!-- SOCIAL / CONTACTO -->
+      <div class="col">
+        <h4>SÍGUENOS Y ESCRÍBENOS</h4>
+        <div class="social">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/anea.ecologista/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/p/ANEA-Asociaci%C3%B3n-por-el-Medio-Ambiente-61556911225780/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
+        <!-- Gmail (CORREGIDO: Añadido target, rel para seguridad y asunto automático opcional) -->
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=aneaecologista@gmail.com&su=Contacto%20desde%20la%20web" target="_blank" rel="noopener noreferrer" aria-label="Enviar Correo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+  <div class="footer-bottom">
+    <p>© 2026 
+      <!-- Corregido: añadido https:// y target="_blank" -->
+      <a href="https://www.linkedin.com/in/julia-mart%C3%ADnez-barrag%C3%A1n-8015a8351" target="_blank" rel="noopener noreferrer" class="link-autor">JUM</a> 
+      / ANEA. Todos los derechos reservados.
+    </p>
+
+        <div class="legal">
+          <!-- Cambiamos routerLink por funciones de click -->
+          <a (click)="abrirLegal('privacidad')" class="link-legal">Privacidad</a>
+          <a (click)="abrirLegal('terminos')" class="link-legal">Términos</a>
+          <a (click)="abrirLegal('cookies')" class="link-legal">Cookies</a>
+        </div>
+      </div>
+
+      <!-- LA PESTAÑOTA (VENTANA MODAL) -->
+      <!-- Solo se muestra si 'modalAbierta' es true -->
+      <div class="modal-legal-overlay" *ngIf="modalAbierta" (click)="cerrarModal()">
+        <!-- El (click) con stopPropagation evita que la ventana se cierre si haces click dentro del texto -->
+        <div class="modal-legal-content" (click)="$event.stopPropagation()">
+          
+          <!-- Botón para cerrar (X) -->
+          <button class="modal-close-btn" (click)="cerrarModal()">&times;</button>
+          
+          <!-- Título y contenido dinámico según lo que hayan pulsado -->
+          <h2>{{ tituloModal }}</h2>
+          <div class="modal-scroll-area">
+            <p [innerHTML]="contenidoModal"></p>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</footer>

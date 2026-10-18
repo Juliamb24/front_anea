@@ -1,0 +1,59 @@
+<main class="news-page">
+	<header class="news-masthead">
+		<div>
+			<span class="news-eyebrow">ANEA · ACTUALIDAD Y CONSERVACIÓN</span>
+			<h1>Noticias de nuestros <em>humedales</em></h1>
+			<p>Seguimiento, conservación y vida silvestre en Doñana, el Bajo Guadalquivir y Andalucía.</p>
+		</div>
+		<span class="news-edition">Selección 2026</span>
+	</header>
+
+	<section class="news-content" aria-label="Noticias ambientales">
+		<article class="featured-news">
+			<a class="featured-image" [href]="featuredStory.url" target="_blank" rel="noopener noreferrer" [attr.aria-label]="'Leer en ' + featuredStory.source + ': ' + featuredStory.title">
+				<img [src]="featuredStory.image" [alt]="featuredStory.imageAlt">
+			</a>
+			<div class="featured-copy">
+				<div class="news-meta"><time [attr.datetime]="featuredStory.date">{{ featuredStory.dateLabel }}</time><span>{{ featuredStory.category }}</span></div>
+				<h2><a [href]="featuredStory.url" target="_blank" rel="noopener noreferrer">{{ featuredStory.title }}</a></h2>
+				<p>{{ featuredStory.summary }}</p>
+				<a class="news-source-link" [href]="featuredStory.url" target="_blank" rel="noopener noreferrer">Fuente: {{ featuredStory.source }} <span aria-hidden="true">↗</span></a>
+			</div>
+		</article>
+
+		<div class="news-section-heading">
+			<span class="news-eyebrow">TERRITORIO Y BIODIVERSIDAD</span>
+			<h2>Más noticias para seguir de cerca</h2>
+		</div>
+
+		<div class="news-grid">
+			@for (story of stories; track story.url) {
+				<article class="news-card">
+					<a class="news-card-image" [href]="story.url" target="_blank" rel="noopener noreferrer" [attr.aria-label]="'Leer en ' + story.source + ': ' + story.title">
+						<img [src]="story.image" [alt]="story.imageAlt" loading="lazy">
+					</a>
+					<div class="news-card-copy">
+						<div class="news-meta"><time [attr.datetime]="story.date">{{ story.dateLabel }}</time><span>{{ story.category }}</span></div>
+						<h3><a [href]="story.url" target="_blank" rel="noopener noreferrer">{{ story.title }}</a></h3>
+						<p>{{ story.summary }}</p>
+						<a class="news-source-link" [href]="story.url" target="_blank" rel="noopener noreferrer">Fuente: {{ story.source }} <span aria-hidden="true">↗</span></a>
+					</div>
+				</article>
+			}
+		</div>
+	</section>
+
+	<section class="threatened-section" aria-labelledby="threatened-title">
+		<div class="threatened-intro">
+			<span class="news-eyebrow">ESPECIES A LAS QUE MIRAR</span>
+			<h2 id="threatened-title">Los humedales también son refugio.</h2>
+			<p>La pérdida de agua y de hábitat pone en riesgo a numerosas aves. La cerceta pardilla está catalogada en peligro crítico de extinción.</p>
+			<a class="news-source-link" [href]="threatenedBirdsUrl" target="_blank" rel="noopener noreferrer">Plan de aves de humedales · Junta de Andalucía <span aria-hidden="true">↗</span></a>
+		</div>
+		<ul class="threatened-list">
+			@for (bird of threatenedBirds; track bird) {
+				<li>{{ bird }}</li>
+			}
+		</ul>
+	</section>
+</main>

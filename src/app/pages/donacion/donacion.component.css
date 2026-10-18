@@ -1,0 +1,40 @@
+:host { display:block;color:var(--anea-ink);font-family:'Trebuchet MS','Segoe UI',sans-serif }
+.collab-container { padding:88px 0 64px;background:var(--anea-paper) }
+.collab-header { padding:56px 8% 52px;color:#fffefa;background:var(--anea-blue-deep) }
+.collab-kicker { display:block;margin-bottom:14px;color:#e9c66d;font-size:.73rem;font-weight:800;letter-spacing:.12em }
+.collab-title { margin:0 0 12px;color:#fffefa;font-family:Georgia,'Times New Roman',serif;font-size:3rem;font-weight:500;line-height:1.1 }
+.collab-subtitle { max-width:720px;margin:0;color:rgba(255,254,250,.82);line-height:1.7 }
+.collab-main-layout { display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:24px;max-width:1240px;margin:auto;padding:46px 5.5% 0 }
+.collab-card-wrapper,.impacto-card { border:1px solid rgba(40,97,127,.15);border-radius:4px;background:#fffefa }
+.collab-card-wrapper { padding:30px;border-top:3px solid var(--anea-ochre) }
+.collab-form { display:flex;flex-direction:column;gap:20px }
+.collab-section-subtitle { margin:0;padding-left:13px;border-left:3px solid var(--anea-ochre);color:var(--anea-blue-deep);font-family:Georgia,'Times New Roman',serif;font-size:1.2rem;font-weight:500 }
+.collab-section-subtitle.espacio-top { margin-top:8px }
+.valores-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px }
+.monto-btn { padding:12px 8px;border:1px solid rgba(40,97,127,.22);border-radius:3px;color:var(--anea-blue-deep);background:var(--anea-paper);font-weight:700;cursor:pointer }
+.monto-btn.active { border-color:var(--anea-ochre);background:#f3ead4 }
+.form-field { display:flex;min-width:0;flex-direction:column;gap:7px }
+.form-field label { color:var(--anea-blue-deep);font-size:.86rem;font-weight:700 }
+.collab-form input:not([type=checkbox]) { width:100%;padding:12px 13px;border:1px solid rgba(40,97,127,.22);border-radius:3px;color:var(--anea-ink);background:#fbfaf6;font:inherit;font-size:.9rem }
+.input-moneda-wrapper { position:relative;display:flex;align-items:center }
+.input-moneda-wrapper input { padding-right:40px!important }
+.moneda-simbolo { position:absolute;right:14px;font-weight:700 }
+.resumen-donacion-box { display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-left:3px solid var(--anea-ochre);color:var(--anea-blue-deep);background:#e9eee5;font-size:.9rem;font-weight:700 }
+.resumen-monto { font-family:Georgia,'Times New Roman',serif;font-size:1.6rem }
+.form-group-row { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px }
+.collab-legal-box { padding:16px;border:1px solid rgba(40,97,127,.14);border-radius:3px;background:var(--anea-paper) }
+.form-checkbox-field { display:flex;align-items:flex-start;gap:10px }
+.collab-legal-box input[type=checkbox] { flex:0 0 18px;width:18px;height:18px;margin:2px 0 0;accent-color:var(--anea-green) }
+.collab-legal-box label { color:var(--anea-muted);font-size:.82rem;line-height:1.5 }
+.paypal-container-wrapper { margin-top:4px }
+.cargando-pago-box { margin-top:10px;color:var(--anea-blue-deep);font-size:.9rem;font-weight:700;text-align:center }
+.impacto-card { padding:26px;background:#e9eee5 }
+.impacto-title { margin:0 0 10px;color:var(--anea-blue-deep);font-family:Georgia,'Times New Roman',serif;font-size:1.5rem;font-weight:500 }
+.impacto-intro { margin:0 0 22px;line-height:1.65 }
+.impacto-lista { display:flex;flex-direction:column;gap:18px;margin:0;padding:0;list-style:none }
+.impacto-lista li { display:flex;align-items:flex-start;gap:12px }
+.impacto-lista p,.certificado-donacion-banner p { margin:0;color:var(--anea-muted);font-size:.82rem;line-height:1.5 }
+.certified-donacion-banner { margin-top:24px;padding:15px;border-left:3px solid var(--anea-ochre);background:#fffefa }
+.collab-exito-box { padding:20px;text-align:center }
+@media(max-width:900px) { .collab-main-layout { grid-template-columns:1fr;gap:20px }.impacto-card { order:1 } }
+@media(max-width:600px) { .collab-container { padding-top:76px }.collab-header { padding:44px 22px 38px }.collab-title { font-size:2.35rem }.collab-main-layout { padding:28px 18px 0 }.collab-card-wrapper { padding:22px 18px }.valores-grid { grid-template-columns:repeat(2,minmax(0,1fr)) }.form-group-row { grid-template-columns:1fr;gap:18px }.collab-section-subtitle { font-size:1.08rem } }

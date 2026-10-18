@@ -1,0 +1,43 @@
+:host { display: block; color: var(--anea-ink, #193944); font-family: 'Trebuchet MS', 'Segoe UI', sans-serif; }
+.membership-container { padding: 88px 0 64px; background: var(--anea-paper, #f8f6ed); }
+.membership-header { margin: 0; padding: 58px 8% 54px; color: #fffefa; background: var(--anea-blue-deep, #17465e); text-align: left; }
+.membership-kicker { display: block; margin-bottom: 14px; color: #e9c66d; font-size: .73rem; font-weight: 800; letter-spacing: .12em; }
+.membership-title { margin: 0 0 12px; color: #fffefa; font-family: Georgia, 'Times New Roman', serif; font-size: 3rem; font-weight: 500; line-height: 1.1; }
+.membership-subtitle { max-width: 700px; margin: 0; color: rgba(255,254,250,.82); font-size: 1rem; line-height: 1.7; }
+.cuotas-section, .form-section { max-width: 1160px; margin-right: auto; margin-left: auto; padding-right: 5.5%; padding-left: 5.5%; }
+.cuotas-section { margin-bottom: 34px; padding-top: 48px; }
+.form-section { padding-top: 12px; }
+.section-title { margin: 0 0 24px; padding-left: 14px; border-left: 3px solid var(--anea-ochre, #c7963c); color: var(--anea-blue-deep, #17465e); font-family: Georgia, 'Times New Roman', serif; font-size: 1.55rem; font-weight: 500; line-height: 1.25; }
+.cuotas-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.cuota-card { position: relative; min-height: 170px; padding: 26px; border: 1px solid rgba(40,97,127,.2); border-radius: 4px; background: #fffefa; cursor: pointer; }
+.cuota-card.selected { border: 2px solid var(--anea-ochre, #c7963c); box-shadow: inset 4px 0 0 var(--anea-ochre, #c7963c); }
+.cuota-card h3 { margin: 0 0 10px; color: var(--anea-blue-deep, #17465e); font-family: Georgia, 'Times New Roman', serif; font-size: 1.25rem; font-weight: 500; }
+.cuota-badge { position: absolute; top: 16px; right: 16px; padding: 5px 9px; border-radius: 2px; color: #fffefa; background: var(--anea-blue, #28617f); font-size: .68rem; font-weight: 700; }
+.cuota-precio { margin-bottom: 16px; color: var(--anea-blue-deep, #17465e); font-family: Georgia, 'Times New Roman', serif; font-size: 2rem; font-weight: 700; }
+.cuota-precio span { font-size: .95rem; }
+.cuota-text-detalle { margin: 0; color: var(--anea-muted, #5d7276); font-size: .9rem; line-height: 1.55; }
+.membership-form-wrapper { position: relative; padding: 34px; border: 1px solid rgba(40,97,127,.16); border-top: 3px solid var(--anea-ochre, #c7963c); border-radius: 4px; background: #fffefa; }
+.membership-form { display: flex; flex-direction: column; gap: 20px; }
+.form-sub-title { margin: 0 0 4px; color: var(--anea-blue-deep, #17465e); font-family: Georgia, 'Times New Roman', serif; font-size: 1.2rem; font-weight: 500; }
+.form-group-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.form-field { display: flex; min-width: 0; flex-direction: column; gap: 8px; }
+.membership-form input:not([type="checkbox"]) { width: 100%; padding: 12px 13px; border: 1px solid rgba(40,97,127,.22); border-radius: 3px; color: var(--anea-ink, #193944); background: #fbfaf6; font: inherit; font-size: .9rem; }
+.membership-form input:not([type="checkbox"]):focus { border-color: var(--anea-blue, #28617f); outline: 0; background: #fffefa; box-shadow: 0 0 0 3px rgba(40,97,127,.12); }
+.legal-box-wrapper { padding: 20px; border: 1px solid rgba(40,97,127,.14); border-radius: 3px; color: var(--anea-muted, #5d7276); background: var(--anea-paper, #f8f6ed); font-size: .84rem; line-height: 1.6; }
+.form-checkbox-field { display: flex; align-items: flex-start; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(40,97,127,.16); }
+.form-checkbox-field input[type="checkbox"] { flex: 0 0 18px; width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--anea-green, #4d8964); }
+.form-checkbox-field label { color: var(--anea-blue-deep, #17465e); font-size: .84rem; font-weight: 600; line-height: 1.45; }
+.paypal-section { margin-top: 28px; }
+.paypal-label { margin: 0 0 12px; color: var(--anea-blue-deep, #17465e); font-size: .9rem; font-weight: 700; }
+.membership-exito-box { text-align: center; }
+@media (max-width: 768px) {
+  .membership-container { padding-top: 76px; }
+  .membership-header { padding: 44px 22px 38px; }
+  .membership-title { font-size: 2.35rem; }
+  .cuotas-section, .form-section { padding-right: 18px; padding-left: 18px; }
+  .cuotas-section { padding-top: 36px; }
+  .section-title { font-size: 1.35rem; }
+  .cuotas-grid, .form-group-row { grid-template-columns: 1fr; gap: 16px; }
+  .cuota-card { min-height: 0; padding: 22px; }
+  .membership-form-wrapper { padding: 22px 18px; }
+}

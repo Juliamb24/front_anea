@@ -1,0 +1,159 @@
+<div class="collab-container">
+  
+  <!-- CABECERA DE LA PÁGINA -->
+  <header class="collab-header">
+    <span class="collab-kicker">UNA APORTACIÓN · IMPACTO LOCAL</span>
+    <h1 class="collab-title">Colabora con ANEA</h1>
+    <p class="collab-subtitle">Tu apoyo económico voluntario nos ayuda a financiar proyectos puntuales de conservación, reforestación y educación ambiental en nuestro entorno. Cada aportación cuenta.</p>
+  </header>
+
+  <!-- BLOQUE PRINCIPAL EN DOS COLUMNAS -->
+  <div class="collab-main-layout">
+    
+    <!-- COLUMNA IZQUIERDA: FORMULARIO DE DONACIÓN -->
+    <section class="collab-form-section">
+      <div class="collab-card-wrapper">
+        
+        @if (donacionCompletada) {
+          <div class="collab-exito-box">
+            <div class="exito-icono">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h2>¡Gracias por tu colaboración!</h2>
+            <p>Hemos recibido tu aportación única de <strong>{{ cantidadFinal }}€</strong> de forma correcta a través de PayPal.</p>
+            <p class="exito-instrucciones">Hemos registrado tu donación y enviado un correo de confirmación con los detalles a tu dirección de email.</p>
+          </div>
+        } @else {
+          
+          <form class="collab-form" (submit)="$event.preventDefault()">
+            
+            <!-- 1. Cifras Predefinidas -->
+            <h3 class="collab-section-subtitle">1. Selecciona la cantidad a donar</h3>
+            <div class="valores-grid">
+              @for (monto of cantidadesPredefinidas; track monto) {
+                <button 
+                  type="button" 
+                  class="monto-btn" 
+                  [class.active]="cantidadSeleccionada === monto && !mostrarPersonalizado"
+                  (click)="elegirCantidad(monto)">
+                  {{ monto }}€
+                </button>
+              }
+              <button 
+                type="button" 
+                class="monto-btn" 
+                [class.active]="mostrarPersonalizado"
+                (click)="activarPersonalizado()">
+                Otra cantidad
+              </button>
+            </div>
+
+            <!-- Campo cantidad personalizada -->
+            @if (mostrarPersonalizado) {
+              <div class="form-field personalizado-field animate-fade-in">
+                <label for="cantidadLibre">Introduce tu cantidad (€) *</label>
+                <div class="input-moneda-wrapper">
+                  <input 
+                    type="number" 
+                    id="cantidadLibre" 
+                    name="Cantidad_Personalizada" 
+                    [(ngModel)]="cantidadPersonalizadaValue"
+                    placeholder="Ej. 25" 
+                    min="5" 
+                    max="5000"
+                    (input)="actualizarCantidadLibre($event)"
+                    required>
+                  <span class="moneda-simbolo">€</span>
+                </div>
+              </div>
+            }
+
+            <!-- Resumen Visual -->
+            <div class="resumen-donacion-box">
+              <span>Tu aportación única:</span>
+              <span class="resumen-monto">{{ obtenerCantidadActual() }}€</span>
+            </div>
+
+            <!-- 2. Datos Personales -->
+            <h3 class="collab-section-subtitle espacio-top">2. Tus datos de contacto</h3>
+            
+            <div class="form-field">
+              <label for="collabNombre">Nombre completo *</label>
+              <input type="text" id="collabNombre" name="Nombre" [(ngModel)]="datosDonante.nombre" placeholder="Ej. Carlos Silva" required>
+            </div>
+
+            <div class="form-group-row">
+              <div class="form-field">
+                <label for="collabEmail">Correo electrónico *</label>
+                <input type="email" id="collabEmail" name="Email" [(ngModel)]="datosDonante.email" placeholder="carlos@correo.com" required>
+              </div>
+              <div class="form-field">
+                <label for="collabTelef">Teléfono <span class="opcional">(Opcional)</span></label>
+                <input type="tel" id="collabTelef" name="Telefono" [(ngModel)]="datosDonante.telefono" placeholder="600 000 000">
+              </div>
+            </div>
+
+            <!-- Bloque de aviso legal -->
+            <div class="collab-legal-box">
+              <div class="form-checkbox-field">
+                <input type="checkbox" id="collabLegal" name="AceptaLegal" [(ngModel)]="datosDonante.avisoLegal" required>
+                <label for="collabLegal">Acepto la política de privacidad y el tratamiento de mis datos por parte de ANEA para la gestión de mi donación voluntaria. *</label>
+              </div>
+            </div>
+
+            <!-- CONTENEDOR DEL BOTÓN DE PAYPAL Y ESTADO DE CARGA -->
+            <div class="paypal-container-wrapper">
+              <div id="paypal-button-container"></div>
+            </div>
+
+            @if (cargando) {
+              <div class="cargando-pago-box">
+                Procesando pago con PayPal y registrando colaboración...
+              </div>
+            }
+
+          </form>
+        }
+
+      </div>
+    </section>
+
+    <!-- COLUMNA DERECHA: TRANSPARENCIA -->
+    <aside class="collab-info-sidebar">
+      <div class="impacto-card">
+        <h3 class="impacto-title">¿Qué logramos con tu ayuda?</h3>
+        <p class="impacto-intro">En ANEA optimizamos cada céntimo. Tu colaboración se transforma directamente en acciones reales sobre el terreno:</p>
+        
+        <ul class="impacto-lista">
+          <li>
+            <div class="impacto-icono-min">01</div>
+            <div>
+              <h4>Conservación y Reforestación</h4>
+              <p>Compra de plantones de especies autóctonas, herramientas forestales y mantenimiento de zonas recuperadas.</p>
+            </div>
+          </li>
+          <li>
+            <div class="impacto-icono-min">02</div>
+            <div>
+              <h4>Protección de Fauna Local</h4>
+              <p>Instalación de cajas nido, comederos y seguimiento biológico de especies vulnerables en nuestro entorno.</p>
+            </div>
+          </li>
+          <li>
+            <div class="impacto-icono-min">03</div>
+            <div>
+              <h4>Educación e Impacto Social</h4>
+              <p>Material educativo gratuito para colegios, organización de talleres infantiles y jornadas de voluntariado abiertas.</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="certified-donacion-banner">
+          <span class="certificado-badge">Info</span>
+          <p>Al ser ANEA una entidad sin ánimo de lucro dedicada a la defensa ambiental, puedes solicitar tu <strong>certificado de donación</strong> al finalizar el año para desgravar esta aportación en tu declaración de la renta.</p>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>

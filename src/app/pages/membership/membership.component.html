@@ -1,0 +1,98 @@
+<div class="membership-container">
+  
+  <!-- CABECERA -->
+  <header class="membership-header">
+    <span class="membership-kicker">PROTECCIÓN Y COMPROMISO LOCAL</span>
+    <h1 class="membership-title">Hazte Socio de ANEA</h1>
+    <p class="membership-subtitle">Únete al Grupo para la Defensa de la Naturaleza. Tu apoyo nos permite seguir protegiendo nuestro entorno.</p>
+  </header>
+
+  <!-- SECCIÓN 1: SELECCIÓN DE CUOTA -->
+  <section class="cuotas-section">
+    <h2 class="section-title">1. Selecciona tu tipo de cuota</h2>
+    <div class="cuotas-grid">
+      
+      <!-- Cuota Estándar -->
+      <div class="cuota-card" [class.selected]="cuotaSeleccionada === 'estandar'" (click)="seleccionarCuota('estandar')">
+        @if (cuotaSeleccionada === 'estandar') {
+          <div class="cuota-badge">Seleccionada</div>
+        }
+        <h3>Cuota Estándar</h3>
+        <div class="cuota-precio">25€<span>/año</span></div>
+        <p class="cuota-text-detalle">Incluye el exclusivo <strong>regalo misterioso de bienvenida</strong> de ANEA.</p>
+      </div>
+
+      <!-- Cuota Joven -->
+      <div class="cuota-card" [class.selected]="cuotaSeleccionada === 'joven'" (click)="seleccionarCuota('joven')">
+        @if (cuotaSeleccionada === 'joven') {
+          <div class="cuota-badge">Seleccionada</div>
+        }
+        <h3>Cuota Joven</h3>
+        <div class="cuota-precio">15€<span>/año</span></div>
+        <p class="cuota-text-detalle">Exclusiva para <strong>menores de 21 años</strong>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2: FORMULARIO Y PAGO -->
+  <section class="form-section">
+    <h2 class="section-title">2. Introduce tus datos y haz el pago seguro</h2>
+    
+    <div class="membership-form-wrapper">
+      @if (altaCompletada) {
+        <div class="membership-exito-box">
+          <div class="exito-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h2>¡Bienvenido/a a ANEA!</h2>
+          <p>Hemos procesado tu suscripción correctamente. En breve recibirás un correo de confirmación.</p>
+        </div>
+      } @else {
+        <!-- Formulario de datos -->
+        <form class="membership-form">
+          
+          <h3 class="form-sub-title">Datos Personales</h3>
+          <div class="form-group-row">
+            <div class="form-field">
+              <label for="nombre">Nombre completo *</label>
+              <input type="text" id="nombre" name="Nombre" [(ngModel)]="datosSocio.nombre" name="nombreInput" placeholder="Ej. Julia Martínez" required>
+            </div>
+            <div class="form-field">
+              <label for="dni">DNI / NIE *</label>
+              <input type="text" id="dni" name="DNI" [(ngModel)]="datosSocio.dni" name="dniInput" placeholder="Ej. 12345678X" required>
+            </div>
+          </div>
+
+          <div class="form-group-row">
+            <div class="form-field">
+              <label for="email">Correo electrónico *</label>
+              <input type="email" id="email" name="Email" [(ngModel)]="datosSocio.email" name="emailInput" placeholder="julia@correo.com" required>
+            </div>
+            <div class="form-field">
+              <label for="telefono">Teléfono *</label>
+              <input type="tel" id="telefono" name="Teléfono" [(ngModel)]="datosSocio.telefono" name="telInput" placeholder="+34 600 000 000" required>
+            </div>
+          </div>
+
+          <!-- Bloque de Protección de Datos -->
+          <div class="legal-box-wrapper espacio-top">
+            <p>Al inscribirte, <strong>aceptas</strong> que ANEA trate tus datos personales para gestionar tu adhesión como socio/a conforme a la LOPDGDD.</p>
+            <div class="form-checkbox-field">
+              <input type="checkbox" id="legal" name="AceptaLegal" [(ngModel)]="datosSocio.avisoLegal" name="legalInput" required>
+              <label for="legal">He leído y acepto los términos de inscripción y el tratamiento de mis datos. *</label>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- Contenedor donde se renderizará el Botón de Suscripción de PayPal -->
+        <div class="paypal-section">
+          <p class="paypal-label">3. Selecciona tu método de pago:</p>
+          <div id="paypal-button-container"></div>
+        </div>
+      }
+    </div>
+  </section>
+
+</div>

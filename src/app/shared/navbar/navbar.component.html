@@ -1,0 +1,32 @@
+<header class="navbar" [class.home-overlay]="isHomeRoute" [class.menu-open]="isMenuOpen">
+  <a class="logo" routerLink="/" (click)="closeMenu()">
+    <img src="logo.png" alt="ANEA, Grupo por la Defensa de la Naturaleza">
+  </a>
+
+  <nav class="nav-main" aria-label="Navegación principal">
+      <div class="dropdown" [class.dropdown-open]="isProjectsOpen" (mouseleave)="closeProjectsMenu()">
+        <button class="menu-item" type="button" [attr.aria-expanded]="isProjectsOpen" (click)="toggleProjectsMenu()">
+          QUÉ HACEMOS <span class="arrow-icon" aria-hidden="true">▼</span>
+        </button>
+        <div class="dropdown-content">
+          <a routerLink="/proyectos" (click)="closeMenu()">Nuestros proyectos</a>
+          <a routerLink="/anillamiento" (click)="closeMenu()">Grupo ornitológico</a>
+          <a routerLink="/noticias" (click)="closeMenu()">Noticias</a>
+          <a routerLink="/colaboraciones" (click)="closeMenu()">Colaboraciones</a>
+        </div>
+      </div>
+
+      <a routerLink="/equipo" class="menu-item-link" (click)="closeMenu()">QUIÉNES SOMOS</a>
+      <a routerLink="/contacto" class="menu-item-link" (click)="closeMenu()">CONTACTO</a>
+      <a routerLink="/tienda" class="menu-item-link" (click)="closeMenu()">TIENDA</a>
+      <a class="cta" routerLink="/socios" (click)="closeMenu()">HAZTE SOCIO</a>
+  </nav>
+
+  <button class="menu-toggle" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" [attr.aria-label]="isMenuOpen ? 'Cerrar menú' : 'Abrir menú'">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="nav-overlay" (click)="closeMenu()"></div>
+</header>
